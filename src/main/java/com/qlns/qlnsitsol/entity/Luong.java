@@ -9,103 +9,106 @@ import java.util.List;
 @Entity
 public class Luong {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long id;
+    private  String date;
     @Column(name = "luongcoban")
     private String LuongCoBan;
-    @Column(name = "khoancong")
-    private String KhoanCong;
-    @Column(name = "khoantru")
-    private String KhoanTru;
     @Column(name = "ngaycong")
     private String NgayCong;
     @Column(name = "ghitru")
     private String GhiTru;
-    private  String thang;
-    private  String nam;
 
-    @OneToMany(mappedBy = "luong", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @JoinColumn(name="kyluatid")
     @NotFound(action = NotFoundAction.IGNORE)
-    private List<KhenThuongKl> khenThuongKls;
-    @OneToMany(mappedBy = "luong", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @NotFound(action = NotFoundAction.IGNORE)
-    private List<PhuCap> phuCaps;
-    @OneToMany(mappedBy = "luong", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @NotFound(action = NotFoundAction.IGNORE)
-    private List<TamUng> tamUngs;
-    @OneToMany(mappedBy = "luong", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @NotFound(action = NotFoundAction.IGNORE)
-    private List<KyLuat> kyLuats;
-
+    private KyLuat kyLuat;
     @ManyToOne
     @JoinColumn(name="nhanvienid")
     @NotFound(action = NotFoundAction.IGNORE)
     private NhanVien nhanVien;
-    @OneToMany(mappedBy = "luong", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @JoinColumn(name="hesoluongid")
     @NotFound(action = NotFoundAction.IGNORE)
-    private List<DieuChinhLuong> dieuChinhLuongs;
+    private HeSoLuong heSoLuong;
+    @ManyToOne
+    @JoinColumn(name="khenthuongid")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private KhenThuongKl khenThuongKl;
+    @ManyToOne
+    @JoinColumn(name="tamungid")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private TamUng tamUng;
+    @ManyToOne
+    @JoinColumn(name="phucapid")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private PhuCap phuCap;
 
     public Luong() {
 
     }
 
-    public Luong(long id, String luongCoBan, String khoanCong, String khoanTru, String ngayCong, String ghiTru, String thang, String nam) {
-        this.id = id;
+    public Luong(String date, String luongCoBan, String ngayCong, String ghiTru, KyLuat kyLuat, NhanVien nhanVien, HeSoLuong heSoLuong, KhenThuongKl khenThuongKl, TamUng tamUng, PhuCap phuCap) {
+        this.date = date;
         LuongCoBan = luongCoBan;
-        KhoanCong = khoanCong;
-        KhoanTru = khoanTru;
         NgayCong = ngayCong;
         GhiTru = ghiTru;
-        this.thang = thang;
-        this.nam = nam;
+        this.kyLuat = kyLuat;
+        this.nhanVien = nhanVien;
+        this.heSoLuong = heSoLuong;
+        this.khenThuongKl = khenThuongKl;
+        this.tamUng = tamUng;
+        this.phuCap = phuCap;
     }
 
-//    public List<KhenThuongKl> getKhenThuongKls() {
-//        return khenThuongKls;
-//    }
-
-    public void setKhenThuongKls(List<KhenThuongKl> khenThuongKls) {
-        this.khenThuongKls = khenThuongKls;
+    public String getDate() {
+        return date;
     }
 
-//    public List<PhuCap> getPhuCaps() {
-//        return phuCaps;
-//    }
-
-    public void setPhuCaps(List<PhuCap> phuCaps) {
-        this.phuCaps = phuCaps;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-//    public List<TamUng> getTamUngs() {
-//        return tamUngs;
-//    }
-
-    public void setTamUngs(List<TamUng> tamUngs) {
-        this.tamUngs = tamUngs;
+    public KyLuat getKyLuat() {
+        return kyLuat;
     }
 
-//    public List<KyLuat> getKyLuats() {
-//        return kyLuats;
-//    }
-
-    public void setKyLuats(List<KyLuat> kyLuats) {
-        this.kyLuats = kyLuats;
+    public void setKyLuat(KyLuat kyLuat) {
+        this.kyLuat = kyLuat;
     }
 
-//    public List<DieuChinhLuong> getDieuChinhLuongs() {
-//        return dieuChinhLuongs;
-//    }
-
-    public void setDieuChinhLuongs(List<DieuChinhLuong> dieuChinhLuongs) {
-        this.dieuChinhLuongs = dieuChinhLuongs;
+    public NhanVien getNhanVien() {
+        return nhanVien;
     }
 
-    public long getId() {
-        return id;
+    public HeSoLuong getHeSoLuong() {
+        return heSoLuong;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setHeSoLuong(HeSoLuong heSoLuong) {
+        this.heSoLuong = heSoLuong;
+    }
+
+    public KhenThuongKl getKhenThuongKl() {
+        return khenThuongKl;
+    }
+
+    public void setKhenThuongKl(KhenThuongKl khenThuongKl) {
+        this.khenThuongKl = khenThuongKl;
+    }
+
+    public TamUng getTamUng() {
+        return tamUng;
+    }
+
+    public void setTamUng(TamUng tamUng) {
+        this.tamUng = tamUng;
+    }
+
+    public PhuCap getPhuCap() {
+        return phuCap;
+    }
+
+    public void setPhuCap(PhuCap phuCap) {
+        this.phuCap = phuCap;
     }
 
     public String getLuongCoBan() {
@@ -116,21 +119,6 @@ public class Luong {
         LuongCoBan = luongCoBan;
     }
 
-    public String getKhoanCong() {
-        return KhoanCong;
-    }
-
-    public void setKhoanCong(String khoanCong) {
-        KhoanCong = khoanCong;
-    }
-
-    public String getKhoanTru() {
-        return KhoanTru;
-    }
-
-    public void setKhoanTru(String khoanTru) {
-        KhoanTru = khoanTru;
-    }
 
     public String getNgayCong() {
         return NgayCong;
@@ -146,22 +134,6 @@ public class Luong {
 
     public void setGhiTru(String ghiTru) {
         GhiTru = ghiTru;
-    }
-
-    public String getThang() {
-        return thang;
-    }
-
-    public void setThang(String thang) {
-        this.thang = thang;
-    }
-
-    public String getNam() {
-        return nam;
-    }
-
-    public void setNam(String nam) {
-        this.nam = nam;
     }
 
 //    public NhanVien getNhanVien() {
